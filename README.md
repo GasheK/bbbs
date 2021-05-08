@@ -1,3 +1,6 @@
+# Swagger
+https://editor.swagger.io/?url=https://raw.githubusercontent.com/GasheK/bbbs/master/docs/swagger.json
+# Примеры запросов
 ## Авторизация - получение токена
 ### запрос
 `curl --location --request POST 'http://127.0.0.1:8000/api/v1/token/' 
