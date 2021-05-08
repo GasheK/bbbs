@@ -19,16 +19,16 @@ https://editor.swagger.io/?url=https://raw.githubusercontent.com/GasheK/bbbs/mas
 
 ```json
 [
-  {
-    "id": 1,
-    "name": "Москва",
-    "is_primary": true
-  },
-  {
-    "id": 2,
-    "name": "Воронеж",
-    "is_primary": false
-  }
+    {
+        "id": 1,
+        "name": "Москва",
+        "isPrimary": true
+    },
+    {
+        "id": 2,
+        "name": "Воронеж",
+        "isPrimary": false
+    }
 ]
 ```
 
