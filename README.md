@@ -13,10 +13,11 @@ https://editor.swagger.io/?url=https://raw.githubusercontent.com/GasheK/bbbs/mas
     "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNDk5MjU1LCJqdGkiOiI3N2Q1MWNmNWM1ZGU0YzBmYjE3MDVlMDgzYjU4YjYyMSIsInVzZXJfaWQiOjF9.jPP3p030SSA4H72m1JpElYh-R-bF20CBcLwnxI7Lxjs"
 }
 ```
+После авторизации во все запросы добавляем заголовок
+`--header 'Authorization: Bearer "значение access"'`
 ## Получение списка городов
 `curl --location --request GET 'http://127.0.0.1:8000/api/v1/cities/' 
 --header 'Content-Type: application/json'`
-
 ```json
 [
     {
@@ -31,8 +32,24 @@ https://editor.swagger.io/?url=https://raw.githubusercontent.com/GasheK/bbbs/mas
     }
 ]
 ```
-
+## Получение - обновление профайла пользователя, текущего города пользователя и т.д.
+### запрос
+```bash
+curl --location --request GET 'http://127.0.0.1:8000/api/v1/profile/' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNTM4OTMzLCJqdGkiOiIwOWZlNWUxNmI1MjI0YmM3ODJiYTc1YmM1OWExZWUzZSIsInVzZXJfaWQiOjF9._cDyG8Vp2HWzPPp-Hrm-P5FD5P0zcywVd4o4Gt2FL2M'
+```
+### ответ
+```json
+{
+  "id": 1,
+  "user": 1,
+  "city": 2
+}
+```
 ## Получение главной страницы
+Для авторизованого пользователя город для поиска событий берется из профайла, 
+неавторизованный пользователь отпровляет id города в GET параметре city
 ### запрос
 `curl --location --request GET 'http://127.0.0.1:8000/api/v1/main/' --header 'Content-Type: application/json'`
 ### ответ
@@ -210,10 +227,46 @@ https://editor.swagger.io/?url=https://raw.githubusercontent.com/GasheK/bbbs/mas
     ]
 }
 ```
-
-##
-### запрос
-``
-### ответ
+## Работа с календарем
+### Список событий
+Для авторизованого пользователя город для поиска событий берется из профайла, 
+неавторизованный пользователь отпровляет id города в GET параметре city
+```bash
+curl --location --request GET 'http://127.0.0.1:8000/api/v1/afisha/events/' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNTM4NDU2LCJqdGkiOiIwMTJjMTMzNGQ5MjM0MWI4YWU1YmJhMDExYjAyMTdjOCIsInVzZXJfaWQiOjF9.S4JVKaVnUzr_XmLXOs6pfYKsLBhzEzm9Rhj1jnW6fhc'`
 ```
+### ответ
+флаг booked - зарегистрирован пользователь на это событие или нет
+```json
+[
+    {
+        "id": 1,
+        "booked": true,
+        "address": "Садовническая наб., д. 77 стр. 1 (офис компании Ernst&Young)",
+        "contact": "Александра, +7 926 356-78-90",
+        "title": "Субботний meet up: учимся проходить интевью",
+        "description": "Наконец-то наступила весна и мы пережили эту долгую зиму! И возможно, что внутренних сил и ресурса сейчас не так много, а до окончания учебного года ещё целых несколько месяцев. Поэтому приглашаем вас на встречу нашего ресурсного клуба \"Наставник PRO\", которую мы хотим посвятить теме поиска моральных сил, смыслов и внутреннего ресурса для общения и взаимодействия с нашими подопечными.",
+        "startAt": "2021-05-10T06:00:00Z",
+        "endAt": "2021-05-10T08:00:00Z",
+        "seats": 100,
+        "takenSeats": 0,
+        "city": 1
+    }
+]
+```
+## Записаться на событие
+### запрос
+```bash
+curl --location --request POST 'http://127.0.0.1:8000/api/v1/afisha/event-participants/' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIwNTM4OTMzLCJqdGkiOiIwOWZlNWUxNmI1MjI0YmM3ODJiYTc1YmM1OWExZWUzZSIsInVzZXJfaWQiOjF9._cDyG8Vp2HWzPPp-Hrm-P5FD5P0zcywVd4o4Gt2FL2M' \
+--data-raw '{"event": 1}'
+```
+### ответ
+```json
+{
+  "id": 2,
+  "event": 4
+}
 ```

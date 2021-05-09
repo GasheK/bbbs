@@ -1,4 +1,8 @@
+from django.contrib.auth import get_user_model
 from django.db import models
+
+
+User = get_user_model()
 
 
 class City(models.Model):
@@ -10,3 +14,11 @@ class City(models.Model):
 
     class Meta:
         verbose_name_plural = "Cities"
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    city = models.OneToOneField(City, on_delete=models.RESTRICT)
+
+    def __str__(self):
+        return self.user.username

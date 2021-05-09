@@ -19,8 +19,8 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework_simplejwt import views as jwt_views
 
-from bbbs.afisha.views import EventList
-from bbbs.common.views import CityList
+from bbbs.afisha.views import EventList, EventParticipantList
+from bbbs.common.views import CityList, ProfileView
 from bbbs.main.views import MainView
 
 schema_view = get_schema_view(
@@ -47,6 +47,8 @@ urlpatterns = [
     path('api/v1/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 
     path('api/v1/cities/', CityList.as_view()),
+    path('api/v1/profile/', ProfileView.as_view()),
     path('api/v1/main/', MainView.as_view()),
     path('api/v1/afisha/events/', EventList.as_view()),
+    path('api/v1/afisha/event-participants/', EventParticipantList.as_view()),
 ]
