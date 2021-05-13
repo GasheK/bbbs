@@ -2,3 +2,4 @@ __pycache__/
 .direnv
 db.sqlite3
 .idea
+.*
