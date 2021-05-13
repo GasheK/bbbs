@@ -18,7 +18,7 @@ class City(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    city = models.OneToOneField(City, on_delete=models.RESTRICT)
+    city = models.ForeignKey(City, on_delete=models.RESTRICT)
 
     def __str__(self):
         return self.user.username
