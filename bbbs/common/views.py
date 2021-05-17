@@ -9,6 +9,7 @@ from bbbs.common.serializers import CitySerializer, ProfileSerializer
 class CityList(generics.ListAPIView):
     queryset = City.objects.all().order_by('-is_primary')
     serializer_class = CitySerializer
+    permission_classes = [IsAuthenticated, ]
 
 
 class ProfileView(generics.RetrieveUpdateAPIView):

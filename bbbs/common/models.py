@@ -6,14 +6,15 @@ User = get_user_model()
 
 
 class City(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField("Город", max_length=30)
     is_primary = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "City"
+        verbose_name_plural = "Cities"
 
     def __str__(self):
         return self.name
-
-    class Meta:
-        verbose_name_plural = "Cities"
 
 
 class Profile(models.Model):
