@@ -1,10 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-from bbbs.common.models import City
-
-
-User = get_user_model()
+from bbbs.common.models import City, User
 
 
 class Event(models.Model):
@@ -20,6 +17,10 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = "Мероприятие"
+        verbose_name_plural = "Мероприятия"
 
 
 class EventParticipant(models.Model):
