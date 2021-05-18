@@ -78,7 +78,7 @@ def create_user_profile(sender, instance, update_fields, created, **kwargs):
         instance.profile
     except Profile.DoesNotExist:
         if instance.is_superuser is True:
-            Profile.objects.create(user=instance,role=Profile.ADMIN)
+            Profile.objects.create(user=instance, role=Profile.ADMIN)
         else:
             Profile.objects.create(user=instance)
 
