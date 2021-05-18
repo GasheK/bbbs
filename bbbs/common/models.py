@@ -1,8 +1,15 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.db.models.signals import post_save, post_delete, pre_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from django.core.exceptions import PermissionDenied
+
+
+def users_list_view(request):
+    if not request.user.has_perm('auth.view_user'):
+        raise PermissionDenied()
+
 
 User = get_user_model()
 
@@ -29,10 +36,10 @@ class Profile(models.Model):
     MENTOR = 'Наставник'
 
     USER_TYPE_CHOICES = [
-        (MODERATOR_GENERAL, 'moderator_general'),
-        (MODERATOR_REGIONAL, 'moderator_regional'),
-        (ADMIN, 'admin'),
-        (MENTOR, 'mentor'),
+        (MODERATOR_GENERAL, 'Модератор "общий"'),
+        (MODERATOR_REGIONAL, 'Модератор "региональный"'),
+        (ADMIN, 'Администратор'),
+        (MENTOR, 'Наставник'),
     ]
 
     role = models.CharField(
@@ -70,25 +77,27 @@ def create_user_profile(sender, instance, update_fields, created, **kwargs):
     try:
         instance.profile
     except Profile.DoesNotExist:
-        Profile.objects.create(user=instance)
+        if instance.is_superuser is True:
+            Profile.objects.create(user=instance,role=Profile.ADMIN)
+        else:
+            Profile.objects.create(user=instance)
 
 
 @receiver(post_save, sender=Profile)
 def update_user(sender, instance, created, **kwargs):
-    if not created:
-        if instance.role == Profile.MENTOR or not instance.role:
-            instance.user.is_staff = False
-        else:
-            instance.user.is_staff = True
-        if instance.role == Profile.ADMIN:
-            instance.user.is_superuser = True
-        else:
-            instance.user.is_superuser = False
-        if not instance.role:
-            instance.user.is_active = False
-        else:
-            instance.user.is_active = True
-        instance.user.save()
+    if instance.role == Profile.MENTOR or not instance.role:
+        instance.user.is_staff = False
+    else:
+        instance.user.is_staff = True
+    if instance.role == Profile.ADMIN:
+        instance.user.is_superuser = True
+    else:
+        instance.user.is_superuser = False
+    if not instance.role:
+        instance.user.is_active = False
+    else:
+        instance.user.is_active = True
+    instance.user.save()
 
 
 @receiver(post_delete, sender=Profile)
