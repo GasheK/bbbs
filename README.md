@@ -190,7 +190,8 @@ curl --location --request GET 'http://127.0.0.1:8000/api/v1/profile/' \
         "title": "Эфир с выпускником нашей программы",
         "info": "Иван Рустаев, выпускник программы",
         "link": "https://youtu.be/H980rXfjdq4",
-        "imageUrl": "https://picsum.photos/1199/675"
+        "imageUrl": "https://picsum.photos/1199/675",
+        "duration": 134
     },
     "questions": [
         {

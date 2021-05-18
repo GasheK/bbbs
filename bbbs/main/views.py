@@ -140,6 +140,7 @@ class MainView(APIView):
                 'info': 'Иван Рустаев, выпускник программы',
                 'link': 'https://youtu.be/H980rXfjdq4',
                 'image_url': 'https://picsum.photos/1199/675',
+                'duration': 134,
             },
             'questions': [
                 {
