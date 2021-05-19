@@ -3,12 +3,6 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
-# from django.core.exceptions import PermissionDenied
-
-#
-# def users_list_view(request):
-#     if not request.user.has_perm('auth.view_user'):
-#         raise PermissionDenied()
 
 
 User = get_user_model()
@@ -21,12 +15,12 @@ class City(models.Model):
     )
     is_primary = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         verbose_name = "Город"
         verbose_name_plural = "Города"
+
+    def __str__(self):
+        return self.name
 
 
 class Profile(models.Model):
@@ -64,12 +58,12 @@ class Profile(models.Model):
         verbose_name='Город',
     )
 
-    def __str__(self):
-        return self.user.username
-
     class Meta:
         verbose_name = "Профайл"
         verbose_name_plural = "Профайлы"
+
+    def __str__(self):
+        return self.user.username
 
 
 @receiver(post_save, sender=User)
