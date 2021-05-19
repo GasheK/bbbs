@@ -1,12 +1,15 @@
+from django.contrib.auth.models import AnonymousUser
 from bbbs.common.models import Profile
 
 
 class ModulePermissionMixin(object):
 
     def has_module_permission(self, request):
-        if request.user.profile.role == Profile.MENTOR:
-            return False
-        return True
+        if request.user.is_authenticated:
+            if request.user.profile.role == Profile.MENTOR:
+                return False
+            return True
+        return False
 
 
 class ViewPermissionMixin:

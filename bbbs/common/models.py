@@ -3,12 +3,12 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
-from django.core.exceptions import PermissionDenied
+# from django.core.exceptions import PermissionDenied
 
-
-def users_list_view(request):
-    if not request.user.has_perm('auth.view_user'):
-        raise PermissionDenied()
+#
+# def users_list_view(request):
+#     if not request.user.has_perm('auth.view_user'):
+#         raise PermissionDenied()
 
 
 User = get_user_model()
