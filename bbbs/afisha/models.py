@@ -1,4 +1,3 @@
-from django.contrib.auth import get_user_model
 from django.db import models
 
 from bbbs.common.models import City, User
@@ -32,7 +31,7 @@ class Event(models.Model):
     end_at = models.DateTimeField(
         verbose_name='Дата окончания',
     )
-    seats = models.IntegerField(
+    seats = models.PositiveIntegerField(
         verbose_name='Количество мест',
     )
     taken_seats = models.IntegerField(
