@@ -28,6 +28,11 @@ class CustomProfileAdmin(ModelAdmin):
     list_per_page = LIST_PER_PAGE
     filter_horizontal = ('city',)
 
+    def has_add_permission(self, request):
+        """ Профиль создается при добавлении нового пользователя,
+        так что создать отдельно профиль нельзя."""
+        return False
+
 
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
