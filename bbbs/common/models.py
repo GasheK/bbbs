@@ -1,8 +1,5 @@
-from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.db.models.signals import post_save, post_delete
-from django.dispatch import receiver
 
 
 class City(models.Model):
@@ -57,8 +54,7 @@ class User(AbstractUser):
             self.is_superuser = True
             self.is_staff = True
         elif (self.role == User.MODERATOR_GENERAL or
-              self.role == User.MODERATOR_REGIONAL
-        ):
+              self.role == User.MODERATOR_REGIONAL):
             self.is_superuser = False
             self.is_staff = True
         elif self.role == User.MENTOR:
