@@ -51,8 +51,35 @@ class DeletePermissionMixin:
         return False
 
 
+class CityAdminPermissionMixin(
+    ModulePermissionMixin,
+    ViewPermissionMixin,
+    AddPermissionMixin,
+    ChangePermissionMixin,
+    DeletePermissionMixin,
+):
+    pass
+
+
 class UserAdminPermissionMixin(
     ModulePermissionMixin,
     ViewPermissionMixin,
 ):
-    pass
+    # def get_readonly_fields(self, request, obj=None):
+    #     if request.user.role == User.ADMIN:
+    #         return self.readonly_fields
+    #     return [f.name for f in self.model._meta.fields]
+    def has_change_permission(self, request, obj=None):
+        if request.user.role == User.ADMIN:
+            return True
+        return False
+
+    def has_add_permission(self, request):
+        if request.user.role == User.ADMIN:
+            return True
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        if request.user.role == User.ADMIN:
+            return True
+        return False
