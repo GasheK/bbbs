@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from bbbs.afisha.models import Event
-from bbbs.common.models import Profile
+from bbbs.common.models import User
 from bbbs.afisha.permission import EventAdminPermissionMixin
 from django import forms
 
@@ -30,9 +30,9 @@ class EventAdmin(EventAdminPermissionMixin, admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
     def get_queryset(self, request):
-        full_allowed_user_roles = [Profile.ADMIN, Profile.MODERATOR_GENERAL]
+        full_allowed_user_roles = [User.ADMIN, User.MODERATOR_GENERAL]
         qs = super(EventAdmin, self).get_queryset(request)
-        if request.user.profile.role in full_allowed_user_roles:
+        if request.user.role in full_allowed_user_roles:
             return qs
 
 

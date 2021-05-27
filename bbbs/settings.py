@@ -147,5 +147,5 @@ REST_FRAMEWORK = {
     ),
 }
 #
-# AUTH_USER_MODEL = 'common.User'
+AUTH_USER_MODEL = 'common.User'
 

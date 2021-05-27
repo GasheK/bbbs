@@ -5,9 +5,6 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
 
-User = get_user_model()
-
-
 class City(models.Model):
     name = models.CharField(
         max_length=30,
@@ -23,7 +20,7 @@ class City(models.Model):
         return self.name
 
 
-class Profile(models.Model):
+class User(AbstractUser):
     MODERATOR_GENERAL = 'Модератор "общий"'
     MODERATOR_REGIONAL = 'Модератор "региональный"'
     ADMIN = 'Администратор'
@@ -49,51 +46,31 @@ class Profile(models.Model):
         max_length=255,
         blank=True,
     )
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    city = models.ForeignKey(
+    city = models.ManyToManyField(
         City,
-        on_delete=models.RESTRICT,
-        null=True,
         blank=True,
         verbose_name='Город',
     )
+
+    def save(self, *args, **kwargs):
+        if self.role == User.ADMIN:
+            self.is_superuser = True
+            self.is_staff = True
+        elif (self.role == User.MODERATOR_GENERAL or
+              self.role == User.MODERATOR_REGIONAL
+        ):
+            self.is_superuser = False
+            self.is_staff = True
+        elif self.role == User.MENTOR:
+            self.is_superuser = False
+            self.is_staff = False
+        if self.is_superuser is True:
+            self.role = User.ADMIN
+        super(User, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Профайл"
         verbose_name_plural = "Профайлы"
 
     def __str__(self):
-        return self.user.username
-
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, update_fields, created, **kwargs):
-    try:
-        instance.profile
-    except Profile.DoesNotExist:
-        if instance.is_superuser is True:
-            Profile.objects.create(user=instance, role=Profile.ADMIN)
-        else:
-            Profile.objects.create(user=instance)
-
-
-@receiver(post_save, sender=Profile)
-def update_user(sender, instance, created, **kwargs):
-    if instance.role == Profile.MENTOR or not instance.role:
-        instance.user.is_staff = False
-    else:
-        instance.user.is_staff = True
-    if instance.role == Profile.ADMIN:
-        instance.user.is_superuser = True
-    else:
-        instance.user.is_superuser = False
-    if not instance.role:
-        instance.user.is_active = False
-    else:
-        instance.user.is_active = True
-    instance.user.save()
-
-
-@receiver(post_delete, sender=Profile)
-def update_user(sender, instance, *args, **kwargs):
-    instance.user.delete()
+        return self.username
