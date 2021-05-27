@@ -1,6 +1,4 @@
 from bbbs.common.models import User
-from rest_framework.permissions import SAFE_METHODS, BasePermission
-from django.contrib.auth.models import PermissionsMixin
 
 
 class ModulePermissionMixin:
@@ -21,7 +19,6 @@ class ViewPermissionMixin:
         if request.user.role in allowed_user_roles:
             return True
         return False
-
 
 
 class AddPermissionMixin:

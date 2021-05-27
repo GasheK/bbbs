@@ -1,4 +1,3 @@
-from django.contrib.auth.models import AnonymousUser
 from bbbs.common.models import User
 
 

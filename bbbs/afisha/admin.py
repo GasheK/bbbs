@@ -1,9 +1,9 @@
+from django import forms
 from django.contrib import admin
 
 from bbbs.afisha.models import Event
-from bbbs.common.models import User, City
 from bbbs.afisha.permission import EventAdminPermissionMixin
-from django import forms
+from bbbs.common.models import City, User
 
 
 class EventForm(forms.ModelForm):
@@ -38,12 +38,14 @@ class EventAdmin(EventAdminPermissionMixin, admin.ModelAdmin):
         return qs.filter(city__in=ids)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "city" and request.user.role == User.MODERATOR_REGIONAL:
+        if (db_field.name == "city" and request.user.role ==
+                User.MODERATOR_REGIONAL):
             kwargs["queryset"] = City.objects.filter(user=request.user)
-        return super(EventAdmin, self).formfield_for_foreignkey(db_field,
-                                                                  request,
-                                                                  **kwargs)
+        return super(EventAdmin, self).formfield_for_foreignkey(
+            db_field,
+            request,
+            **kwargs
+        )
 
 
 admin.site.register(Event, EventAdmin)
-

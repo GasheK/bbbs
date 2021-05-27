@@ -1,14 +1,12 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import Group
 from django.utils.translation import gettext_lazy as _
-from django import forms
 
 from bbbs.common.models import City, User
-from django.contrib.auth.models import Group
-
-from bbbs.common.permission import CityAdminPermissionMixin, \
-    UserAdminPermissionMixin
+from bbbs.common.permission import (CityAdminPermissionMixin,
+                                    UserAdminPermissionMixin)
 
 
 class UserCreationForm(UserCreationForm):

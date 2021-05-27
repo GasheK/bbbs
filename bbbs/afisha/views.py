@@ -1,7 +1,7 @@
 from rest_framework import generics
 
 from bbbs.afisha.models import Event, EventParticipant
-from bbbs.afisha.serializers import EventSerializer, EventParticipantSerializer
+from bbbs.afisha.serializers import EventParticipantSerializer, EventSerializer
 
 
 class EventList(generics.ListAPIView):
