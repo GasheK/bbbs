@@ -1,4 +1,3 @@
-__pycache__/
-.direnv
+venv
+*__pycache__
 db.sqlite3
-.idea
