@@ -30,8 +30,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'bbbs.afisha',
     'bbbs.common',
-    'bbbs.questions',
     'bbbs.places',
+    'bbbs.rights',
+    'bbbs.questions',
 ]
 
 MIDDLEWARE = [
