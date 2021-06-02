@@ -11,6 +11,7 @@ djangorestframework = "^3.12"
 djangorestframework-camel-case = "^1.2"
 drf-yasg = "^1.20"
 djangorestframework-simplejwt = "^4.6"
+Pillow = "^8.2.0"
 
 [tool.poetry.dev-dependencies]
 
