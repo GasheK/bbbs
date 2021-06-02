@@ -1,7 +1,9 @@
 # Этапы разработки
 [Бекенд первый этап](docs/backend-step1.md)
+[Бекенд второй этап](docs/backend-step2.md)
+
 # Swagger
-https://editor.swagger.io/?url=https://raw.githubusercontent.com/ivartm/bbbs-stage2/master/docs/swagger.json
+https://editor.swagger.io/?url=https://raw.githubusercontent.com/GasheK/bbbs/master/docs/swagger.json
 # Примеры запросов
 ## Авторизация - получение токена
 ### запрос

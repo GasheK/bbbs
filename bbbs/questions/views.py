@@ -7,7 +7,7 @@ from bbbs.questions.serializers import (
 )
 
 
-class QuestiosList(generics.ListCreateAPIView):
+class QuestiosList(generics.ListAPIView):
     queryset = Question.objects.all()
 
     def get_serializer_class(self):
