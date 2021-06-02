@@ -21,7 +21,7 @@ from rest_framework_simplejwt import views as jwt_views
 
 from bbbs.afisha.views import EventList, EventParticipantList
 from bbbs.questions.views import QuestiosList
-from bbbs.common.views import CityList, ProfileView, TagList
+from bbbs.common.views import CityList, ProfileView
 from bbbs.main.views import MainView
 from bbbs.places.views import PlaceList
 from bbbs.rights.views import RightList
@@ -49,7 +49,6 @@ urlpatterns = [
     path('api/v1/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/v1/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 
-    path('api/v1/tags/', TagList.as_view()),
     path('api/v1/questions/', QuestiosList.as_view()),
     path('api/v1/cities/', CityList.as_view()),
     path('api/v1/profile/', ProfileView.as_view()),

@@ -12,8 +12,3 @@ class CityList(generics.ListAPIView):
 class ProfileView(generics.RetrieveUpdateAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-
-
-class TagList(generics.ListAPIView):
-    queryset = Tag.objects.all().order_by('-name')
-    serializer_class = TagSerializer
