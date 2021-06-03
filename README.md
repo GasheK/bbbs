@@ -1,5 +1,5 @@
 # Этапы разработки
-[Бекенд первый этап](docs/backend-step1.md)
+[Бекенд первый этап](docs/backend-step1.md). 
 [Бекенд второй этап](docs/backend-step2.md)
 
 # Swagger
