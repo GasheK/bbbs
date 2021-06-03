@@ -30,14 +30,39 @@
 			"get": {
 				"operationId": "afisha_event-participants_list",
 				"description": "",
-				"parameters": [],
+				"parameters": [{
+					"name": "page",
+					"in": "query",
+					"description": "A page number within the paginated result set.",
+					"required": false,
+					"type": "integer"
+				}],
 				"responses": {
 					"200": {
 						"description": "",
 						"schema": {
-							"type": "array",
-							"items": {
-								"$ref": "#/definitions/EventParticipant"
+							"required": ["count", "results"],
+							"type": "object",
+							"properties": {
+								"count": {
+									"type": "integer"
+								},
+								"next": {
+									"type": "string",
+									"format": "uri",
+									"x-nullable": true
+								},
+								"previous": {
+									"type": "string",
+									"format": "uri",
+									"x-nullable": true
+								},
+								"results": {
+									"type": "array",
+									"items": {
+										"$ref": "#/definitions/EventParticipant"
+									}
+								}
 							}
 						}
 					}
@@ -82,14 +107,39 @@
 			"get": {
 				"operationId": "afisha_events_list",
 				"description": "",
-				"parameters": [],
+				"parameters": [{
+					"name": "page",
+					"in": "query",
+					"description": "A page number within the paginated result set.",
+					"required": false,
+					"type": "integer"
+				}],
 				"responses": {
 					"200": {
 						"description": "",
 						"schema": {
-							"type": "array",
-							"items": {
-								"$ref": "#/definitions/Event"
+							"required": ["count", "results"],
+							"type": "object",
+							"properties": {
+								"count": {
+									"type": "integer"
+								},
+								"next": {
+									"type": "string",
+									"format": "uri",
+									"x-nullable": true
+								},
+								"previous": {
+									"type": "string",
+									"format": "uri",
+									"x-nullable": true
+								},
+								"results": {
+									"type": "array",
+									"items": {
+										"$ref": "#/definitions/Event"
+									}
+								}
 							}
 						}
 					}
@@ -132,18 +182,102 @@
 			},
 			"parameters": []
 		},
-		"/places/": {
+		"/place/": {
 			"get": {
-				"operationId": "places_list",
+				"operationId": "place_read",
 				"description": "",
 				"parameters": [],
 				"responses": {
 					"200": {
 						"description": "",
 						"schema": {
-							"type": "array",
-							"items": {
-								"$ref": "#/definitions/Place"
+							"$ref": "#/definitions/Place"
+						}
+					}
+				},
+				"tags": ["place"]
+			},
+			"put": {
+				"operationId": "place_update",
+				"description": "",
+				"parameters": [{
+					"name": "data",
+					"in": "body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/Place"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/Place"
+						}
+					}
+				},
+				"tags": ["place"]
+			},
+			"patch": {
+				"operationId": "place_partial_update",
+				"description": "",
+				"parameters": [{
+					"name": "data",
+					"in": "body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/Place"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/Place"
+						}
+					}
+				},
+				"tags": ["place"]
+			},
+			"parameters": []
+		},
+		"/places/": {
+			"get": {
+				"operationId": "places_list",
+				"description": "",
+				"parameters": [{
+					"name": "page",
+					"in": "query",
+					"description": "A page number within the paginated result set.",
+					"required": false,
+					"type": "integer"
+				}],
+				"responses": {
+					"200": {
+						"description": "",
+						"schema": {
+							"required": ["count", "results"],
+							"type": "object",
+							"properties": {
+								"count": {
+									"type": "integer"
+								},
+								"next": {
+									"type": "string",
+									"format": "uri",
+									"x-nullable": true
+								},
+								"previous": {
+									"type": "string",
+									"format": "uri",
+									"x-nullable": true
+								},
+								"results": {
+									"type": "array",
+									"items": {
+										"$ref": "#/definitions/Place"
+									}
+								}
 							}
 						}
 					}
@@ -211,18 +345,102 @@
 			},
 			"parameters": []
 		},
-		"/questions/": {
+		"/question/": {
 			"get": {
-				"operationId": "questions_list",
+				"operationId": "question_read",
 				"description": "",
 				"parameters": [],
 				"responses": {
 					"200": {
 						"description": "",
 						"schema": {
-							"type": "array",
-							"items": {
-								"$ref": "#/definitions/QuestionGet"
+							"$ref": "#/definitions/QuestionPost"
+						}
+					}
+				},
+				"tags": ["question"]
+			},
+			"put": {
+				"operationId": "question_update",
+				"description": "",
+				"parameters": [{
+					"name": "data",
+					"in": "body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/QuestionPost"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/QuestionPost"
+						}
+					}
+				},
+				"tags": ["question"]
+			},
+			"patch": {
+				"operationId": "question_partial_update",
+				"description": "",
+				"parameters": [{
+					"name": "data",
+					"in": "body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/QuestionPost"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/QuestionPost"
+						}
+					}
+				},
+				"tags": ["question"]
+			},
+			"parameters": []
+		},
+		"/questions/": {
+			"get": {
+				"operationId": "questions_list",
+				"description": "",
+				"parameters": [{
+					"name": "page",
+					"in": "query",
+					"description": "A page number within the paginated result set.",
+					"required": false,
+					"type": "integer"
+				}],
+				"responses": {
+					"200": {
+						"description": "",
+						"schema": {
+							"required": ["count", "results"],
+							"type": "object",
+							"properties": {
+								"count": {
+									"type": "integer"
+								},
+								"next": {
+									"type": "string",
+									"format": "uri",
+									"x-nullable": true
+								},
+								"previous": {
+									"type": "string",
+									"format": "uri",
+									"x-nullable": true
+								},
+								"results": {
+									"type": "array",
+									"items": {
+										"$ref": "#/definitions/QuestionGet"
+									}
+								}
 							}
 						}
 					}
@@ -235,14 +453,39 @@
 			"get": {
 				"operationId": "rights_list",
 				"description": "",
-				"parameters": [],
+				"parameters": [{
+					"name": "page",
+					"in": "query",
+					"description": "A page number within the paginated result set.",
+					"required": false,
+					"type": "integer"
+				}],
 				"responses": {
 					"200": {
 						"description": "",
 						"schema": {
-							"type": "array",
-							"items": {
-								"$ref": "#/definitions/Right"
+							"required": ["count", "results"],
+							"type": "object",
+							"properties": {
+								"count": {
+									"type": "integer"
+								},
+								"next": {
+									"type": "string",
+									"format": "uri",
+									"x-nullable": true
+								},
+								"previous": {
+									"type": "string",
+									"format": "uri",
+									"x-nullable": true
+								},
+								"results": {
+									"type": "array",
+									"items": {
+										"$ref": "#/definitions/Right"
+									}
+								}
 							}
 						}
 					}
@@ -467,6 +710,23 @@
 				"city": {
 					"title": "City",
 					"type": "integer"
+				}
+			}
+		},
+		"QuestionPost": {
+			"required": ["question"],
+			"type": "object",
+			"properties": {
+				"id": {
+					"title": "ID",
+					"type": "integer",
+					"readOnly": true
+				},
+				"question": {
+					"title": "Question",
+					"type": "string",
+					"maxLength": 500,
+					"minLength": 1
 				}
 			}
 		},

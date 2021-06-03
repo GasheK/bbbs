@@ -7,6 +7,7 @@ from bbbs.common.serializers import CitySerializer, ProfileSerializer, TagSerial
 class CityList(generics.ListAPIView):
     queryset = City.objects.all().order_by('-is_primary')
     serializer_class = CitySerializer
+    pagination_class = None
 
 
 class ProfileView(generics.RetrieveUpdateAPIView):
