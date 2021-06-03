@@ -449,6 +449,26 @@
 			},
 			"parameters": []
 		},
+		"/questions//tags/": {
+			"get": {
+				"operationId": "questions__tags_list",
+				"description": "",
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Tag"
+							}
+						}
+					}
+				},
+				"tags": ["questions"]
+			},
+			"parameters": []
+		},
 		"/rights/": {
 			"get": {
 				"operationId": "rights_list",
@@ -756,6 +776,31 @@
 						"type": "integer"
 					},
 					"uniqueItems": true
+				}
+			}
+		},
+		"Tag": {
+			"required": ["name", "slug"],
+			"type": "object",
+			"properties": {
+				"id": {
+					"title": "ID",
+					"type": "integer",
+					"readOnly": true
+				},
+				"name": {
+					"title": "Name",
+					"type": "string",
+					"maxLength": 50,
+					"minLength": 1
+				},
+				"slug": {
+					"title": "Slug",
+					"type": "string",
+					"format": "slug",
+					"pattern": "^[-a-zA-Z0-9_]+$",
+					"maxLength": 50,
+					"minLength": 1
 				}
 			}
 		},
