@@ -449,7 +449,7 @@
 			},
 			"parameters": []
 		},
-		"/questions//tags/": {
+		"/questions/tags/": {
 			"get": {
 				"operationId": "questions__tags_list",
 				"description": "",

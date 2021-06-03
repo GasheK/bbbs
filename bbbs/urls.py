@@ -50,7 +50,7 @@ urlpatterns = [
     path('api/v1/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 
     path('api/v1/questions/', QuestionsList.as_view()),
-    path('api/v1/questions//tags/', TagList.as_view()),
+    path('api/v1/questions/tags/', TagList.as_view()),
     path('api/v1/question/', QuestionView.as_view()),
     path('api/v1/cities/', CityList.as_view()),
     path('api/v1/profile/', ProfileView.as_view()),
