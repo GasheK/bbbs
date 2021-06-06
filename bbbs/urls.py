@@ -24,7 +24,7 @@ from bbbs.questions.views import QuestionsList, QuestionView
 from bbbs.common.views import CityList, ProfileView, TagList
 from bbbs.main.views import MainView
 from bbbs.places.views import PlaceList, PlaceView
-from bbbs.rights.views import RightList
+from bbbs.rights.views import RightList, RightView
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -50,14 +50,20 @@ urlpatterns = [
     path('api/v1/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 
     path('api/v1/questions/', QuestionsList.as_view()),
-    path('api/v1/questions/tags/', TagList.as_view()),
     path('api/v1/question/', QuestionView.as_view()),
+    path('api/v1/questions/tags/', TagList.as_view()),
+
     path('api/v1/cities/', CityList.as_view()),
     path('api/v1/profile/', ProfileView.as_view()),
     path('api/v1/main/', MainView.as_view()),
     path('api/v1/afisha/events/', EventList.as_view()),
     path('api/v1/afisha/event-participants/', EventParticipantList.as_view()),
+
     path('api/v1/places/', PlaceList.as_view()),
     path('api/v1/place/', PlaceView.as_view()),
+    path('api/v1/places/tags/', TagList.as_view()),
+
     path('api/v1/rights/', RightList.as_view()),
+    path('api/v1/right/', RightView.as_view()),
+    path('api/v1/rights/tags/', TagList.as_view()),
 ]

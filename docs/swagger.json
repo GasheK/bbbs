@@ -286,6 +286,26 @@
 			},
 			"parameters": []
 		},
+		"/places/tags/": {
+			"get": {
+				"operationId": "places_tags_list",
+				"description": "",
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Tag"
+							}
+						}
+					}
+				},
+				"tags": ["places"]
+			},
+			"parameters": []
+		},
 		"/profile/": {
 			"get": {
 				"operationId": "profile_read",
@@ -451,7 +471,7 @@
 		},
 		"/questions/tags/": {
 			"get": {
-				"operationId": "questions__tags_list",
+				"operationId": "questions_tags_list",
 				"description": "",
 				"parameters": [],
 				"responses": {
@@ -466,6 +486,23 @@
 					}
 				},
 				"tags": ["questions"]
+			},
+			"parameters": []
+		},
+		"/right/": {
+			"get": {
+				"operationId": "right_read",
+				"description": "",
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "",
+						"schema": {
+							"$ref": "#/definitions/Right"
+						}
+					}
+				},
+				"tags": ["right"]
 			},
 			"parameters": []
 		},
@@ -506,6 +543,26 @@
 										"$ref": "#/definitions/Right"
 									}
 								}
+							}
+						}
+					}
+				},
+				"tags": ["rights"]
+			},
+			"parameters": []
+		},
+		"/rights/tags/": {
+			"get": {
+				"operationId": "rights_tags_list",
+				"description": "",
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Tag"
 							}
 						}
 					}
@@ -714,6 +771,31 @@
 				}
 			}
 		},
+		"Tag": {
+			"required": ["name", "slug"],
+			"type": "object",
+			"properties": {
+				"id": {
+					"title": "ID",
+					"type": "integer",
+					"readOnly": true
+				},
+				"name": {
+					"title": "Name",
+					"type": "string",
+					"maxLength": 50,
+					"minLength": 1
+				},
+				"slug": {
+					"title": "Slug",
+					"type": "string",
+					"format": "slug",
+					"pattern": "^[-a-zA-Z0-9_]+$",
+					"maxLength": 50,
+					"minLength": 1
+				}
+			}
+		},
 		"Profile": {
 			"required": ["user", "city"],
 			"type": "object",
@@ -776,31 +858,6 @@
 						"type": "integer"
 					},
 					"uniqueItems": true
-				}
-			}
-		},
-		"Tag": {
-			"required": ["name", "slug"],
-			"type": "object",
-			"properties": {
-				"id": {
-					"title": "ID",
-					"type": "integer",
-					"readOnly": true
-				},
-				"name": {
-					"title": "Name",
-					"type": "string",
-					"maxLength": 50,
-					"minLength": 1
-				},
-				"slug": {
-					"title": "Slug",
-					"type": "string",
-					"format": "slug",
-					"pattern": "^[-a-zA-Z0-9_]+$",
-					"maxLength": 50,
-					"minLength": 1
 				}
 			}
 		},

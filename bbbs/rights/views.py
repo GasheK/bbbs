@@ -8,3 +8,7 @@ class RightList(generics.ListAPIView):
     queryset = Right.objects.all()
     serializer_class = RightSerializer
 
+
+class RightView(generics.RetrieveAPIView):
+    queryset = Right.objects.all()
+    serializer_class = RightSerializer

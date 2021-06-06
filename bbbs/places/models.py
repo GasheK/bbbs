@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy
 
-from bbbs.common.models import Tag
+from bbbs.common.models import Tag, City
 
 
 class Place(models.Model):
@@ -22,6 +22,7 @@ class Place(models.Model):
         verbose_name="Название",
         max_length=200,
     )
+    city = models.ForeignKey(City, on_delete=models.RESTRICT)
     address = models.CharField(
         verbose_name="Адрес",
         max_length=200,
