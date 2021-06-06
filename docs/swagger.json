@@ -719,7 +719,7 @@
 			}
 		},
 		"Place": {
-			"required": ["info", "title", "address", "description"],
+			"required": ["info", "title", "address", "description", "city"],
 			"type": "object",
 			"properties": {
 				"id": {
@@ -768,6 +768,10 @@
 					"readOnly": true,
 					"x-nullable": true,
 					"format": "uri"
+				},
+				"city": {
+					"title": "City",
+					"type": "integer"
 				}
 			}
 		},
