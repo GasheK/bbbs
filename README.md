@@ -37,6 +37,12 @@ https://editor.swagger.io/?url=https://raw.githubusercontent.com/GasheK/bbbs/mas
     }
 ]
 ```
+
+
+dvbhhngncvbghngdbfxvbnfgxcvxc
+
+
+
 ## Получение - обновление профайла пользователя, текущего города пользователя и т.д.
 ### запрос
 ```bash
