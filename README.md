@@ -1,5 +1,7 @@
-acvvbbdncnvbncnbnbvnvb
+egdfbhdbvxbvcbxb
+fvbcgnbvnvmnmnmvmvmvm
 
+acvvbbdncnvbncnbnbvnvb
 
 # Этапы разработки
 [Бекенд первый этап](docs/backend-step1.md)  
